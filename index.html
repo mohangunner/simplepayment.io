@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>IfState</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+</head>
+
+<body>
+    <div id="container" align="center">
+        <form action="">
+            <fieldset>
+                <legend>Payment</legend>
+                <table class="table table-bordered table-hover" style="width:450px">
+                    <tr>
+                        <td>CreditCard No:</td>
+                        <td><input type="text" size="30" placeholder="Enter exact 16digits to enable cvv" onkeyup="fncvv()" id="ccd"></td>
+                    </tr>
+                    <tr>
+                        <td>CVV : </td>
+                        <td><input type="text" size="3" id="cvv" disabled onkeyup="fnyr()"></td>
+                    </tr>
+                    <tr>
+                        <td>Expiry Year : </td>
+                        <td><select name="year" id="yrs" disabled onchange="fnsub()">
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                        </select></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: right"><input type="button" class="btn btn-success" value="submit" disabled id="sub"></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+    </div>
+</body>
+
+<script>
+    function fncvv() {
+
+        var ccd = document.getElementById("ccd").value;
+
+        var cvv = document.getElementById("cvv");
+
+        var regex = /\d/;
+
+        if (regex.test(ccd)) {
+            if (ccd.length == 16) {
+                cvv.removeAttribute('disabled')
+
+            } else {
+
+                cvv.setAttribute('disabled', 'disabled')
+
+            }
+
+
+        }
+    }
+
+    function fnyr() {
+        var cvv = document.getElementById("cvv").value;
+        var regexp = /[0-9]{3}/;
+        var yr = document.getElementById("yrs");
+        if (cvv.match(regexp)) {
+            yr.disabled = false;
+        } else {
+            yr.disabled = true;
+        }
+    }
+
+
+    function fnsub() {
+        var yers = document.getElementById("yrs").value;
+        var btn = document.getElementById("sub");
+        if (yers >= 2017) {
+            btn.disabled = false;
+        } else {
+            btn.disabled = true;
+        }
+
+    }
+
+</script>
+
+</html>
